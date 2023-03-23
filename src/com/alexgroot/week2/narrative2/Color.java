@@ -1,4 +1,4 @@
-package com.alexgroot.week2.narrrative2;
+package com.alexgroot.week2.narrative2;
 
 public class Color {
     private final int x;

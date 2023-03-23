@@ -1,4 +1,4 @@
-package com.alexgroot.week2.narrrative2.card;
+package com.alexgroot.week2.narrative2.card;
 
 import java.util.ArrayList;
 import java.util.List;
