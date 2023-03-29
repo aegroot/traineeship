@@ -2,9 +2,9 @@ package com.alexgroot.week3.Encryption;
 
 
 public class Decryptor {
-
     public static String decrypt(String input, int key) {
         char[] chars = input.toCharArray();
+
 
         for (int i = 0; i < input.length(); i++) {
             if (chars[i] >= 65 && chars[i] <= 90) {
