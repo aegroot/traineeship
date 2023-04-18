@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class MazeRunner {
 
     public static void main(String[] args) {
-        Maze maze = new Maze(4, 4, 2, 1);
+        Maze maze = new Maze(4, 4, 2, 1, 3);
         MazeController controller = new MazeController(maze);
 
         Scanner sc = new Scanner(System.in);
