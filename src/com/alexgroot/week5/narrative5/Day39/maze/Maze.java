@@ -55,5 +55,10 @@ public class Maze {
         return maze[x][y].getState();
     }
 
+    public void emptyAt(int xCord, int yCord) {
+        if (inBounds(xCord, yCord) && maze[xCord][yCord].getState() != BlockState.exit)
+            maze[xCord][yCord].changeState(BlockState.empty);
+    }
+
 
 }

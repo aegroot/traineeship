@@ -38,4 +38,9 @@ public abstract class Employee {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    @Override
+    public String toString() {
+        return "dit is een employee met de naam " + name;
+    }
 }

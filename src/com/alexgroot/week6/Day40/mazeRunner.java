@@ -9,7 +9,6 @@ import com.alexgroot.week6.Day40.enemies.MaelStrom;
 import com.alexgroot.week6.Day40.gameSettings.GameSettings;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class mazeRunner {
@@ -51,9 +50,6 @@ public class mazeRunner {
                 break;
         }
 
-        //int goalX = (int) Math.round(Math.random() * (width - 1));
-        // int goaly = (int) Math.round(Math.random() * (height - 1));
-
         int x = 2, y = 3;
         System.out.printf("generating maze of [%d,%d]", height, width);
         GameSettings settings = new GameSettings(enemies);
@@ -61,13 +57,11 @@ public class mazeRunner {
         Maze maze = new Maze(width, height, x, y, settings);
         MazeController controller = new MazeController(maze);
 
-
         int playerX = 0, playerY = 0;
         while (!controller.isComplete()) {
-            System.out.println(settings.giveResponses(playerX, playerY));
-
-
             System.out.println("\n ________________________________________________ \n");
+            System.out.println(settings.giveResponses(playerX, playerY));
+            System.out.printf("you are in the room at (Row=%d, Column=%d).", playerX, playerY);
 
             System.out.println("What do you want to do?");
 
@@ -77,14 +71,12 @@ public class mazeRunner {
                 handleMovementCommand(controller, command[1]);
             } else if (command[0].equals("shoot")) {
                 handleShootCommand(command[1], enemies,
-                        controller.getPlayerPosition());
+                        controller);
             } else handleMovementCommand(controller, direction);
-
 
             Position playerPosition = controller.getPlayerPosition();
             playerX = playerPosition.getX();
             playerY = playerPosition.getY();
-
 
             try {
                 System.out.println(controller.checkPosition(playerX, playerY));
@@ -92,13 +84,6 @@ public class mazeRunner {
                 System.out.println("you are endlessly drifting in the void \n game over!");
                 return;
             }
-
-
-            System.out.printf("you are in the room at (Row=%d, Column=%d).", playerX, playerY);
-
-            System.out.println();
-
-
         }
     }
 
@@ -128,29 +113,24 @@ public class mazeRunner {
 
     }
 
-    static void handleShootCommand(String command, ArrayList<Enemy> enemies, Position playerPosition) {
+    static void handleShootCommand(String command, ArrayList<Enemy> enemies, MazeController controller) {
 
 
         switch (command) {
             case "north":
-
-
+                controller.shootAt(0, 1);
                 break;
             case "south":
-
-
+                controller.shootAt(0, -1);
                 break;
             case "west":
-
-
+                controller.shootAt(1, 0);
                 break;
             case "east":
-
-
+                controller.shootAt(-1, 0);
                 break;
             default:
-                throw new IllegalArgumentException("illegal input : " + command);
-
+                System.out.println("illegal input: " + command);
         }
     }
 }

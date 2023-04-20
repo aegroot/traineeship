@@ -1,5 +1,6 @@
 package com.alexgroot.week5.narrative5.Day39.control;
 
+import com.alexgroot.week5.narrative5.Day39.maze.BlockState;
 import com.alexgroot.week5.narrative5.Day39.maze.Maze;
 
 public class MazeController {
@@ -40,7 +41,6 @@ public class MazeController {
         switch (maze.stateAt(x, y)) {
             case Amarok:
             case pit:
-
                 sb.append("you died to ").append(maze.stateAt(x, y)).append("\n");
                 sb.append("game over");
                 isDead = true;
@@ -61,6 +61,14 @@ public class MazeController {
                 }
         }
         return sb.toString();
+    }
+
+    public String shootAt(int xCord, int yCord) {
+        String output = maze.stateAt(xCord, yCord) == BlockState.empty ? "miss!" : "you shot" + maze.stateAt(xCord, yCord);
+
+        maze.emptyAt(xCord, yCord);
+
+        return output;
     }
 
     public Position getPlayerPosition() {

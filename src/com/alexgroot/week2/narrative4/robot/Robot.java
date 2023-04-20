@@ -5,19 +5,22 @@ import com.alexgroot.week2.narrative4.robot.command.NorthCommand;
 import com.alexgroot.week2.narrative4.robot.command.SouthCommand;
 import com.alexgroot.week2.narrative4.robot.command.WestCommand;
 
+import java.util.ArrayList;
+
 public class Robot {
     private int x;
     private int y;
     private final boolean isPowered;
-    private final RobotCommand[] commands = new RobotCommand[4];
+    private final ArrayList<RobotCommand> commands;
 
     public Robot() {
 
         this.isPowered = true;
-        commands[0] = new NorthCommand();
-        commands[1] = new SouthCommand();
-        commands[2] = new WestCommand();
-        commands[3] = new EastCommand();
+        commands = new ArrayList<>();
+        commands.add(new NorthCommand());
+        commands.add(new SouthCommand());
+        commands.add(new WestCommand());
+        commands.add(new EastCommand());
 
     }
 
