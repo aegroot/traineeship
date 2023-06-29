@@ -15,7 +15,6 @@ Kan: geld overboeken zolang de klant niet onder de -1000 euro komt.
 geld overboeken kan alleen naar een andere rekening van de bank (dus maak meer dan 1 rekening aan).
 
 
-
 Dit mag nog op de command line.
 
 
@@ -34,4 +33,4 @@ OPtie 4: terug naar klant kiezen
 
 
 
-//! Storten en overboeken zorgt voor een nieuwe transactie
+//! Storten en overboeken zorgt voor een nieuwe transaction
