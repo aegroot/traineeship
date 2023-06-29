@@ -1,0 +1,37 @@
+-Bankrekening
+-Is op naam van een persoon
+-persoon heeft adres + geboortedatum
+-rekening heeft huidig saldo
+-rekening heeft lijst transacties (+/-)
+
+
+
+Gebruiker: bankmedewerker
+Voert in: naam van gebruiker OF bankrekeningnummer
+Dan: huidig saldo opvragen
+
+Kan: geld storten op rekening
+Kan: geld overboeken zolang de klant niet onder de -1000 euro komt.
+geld overboeken kan alleen naar een andere rekening van de bank (dus maak meer dan 1 rekening aan).
+
+
+
+Dit mag nog op de command line.
+
+
+
+Opslag van rekeninggegevens en overboekingen mag in file(s)
+
+
+--
+Van welk persoon of rekening wilt u de gegevens hebben?
+/112 of Alex
+/aangeven of persoon bestaat niet, of huidig saldo
+Dan optie 1: storten / hoeveel
+Optie 2: overboeken / hoeveel, naar welk nummer
+Optie 3: transactiegeschiedenis inzien.
+OPtie 4: terug naar klant kiezen
+
+
+
+//! Storten en overboeken zorgt voor een nieuwe transactie
