@@ -48,6 +48,7 @@ public class User {
         return bankAccount;
     }
 
+
     public String getName() {
         return name;
     }

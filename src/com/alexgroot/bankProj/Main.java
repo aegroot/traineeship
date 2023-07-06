@@ -17,7 +17,9 @@ public class Main {
         User jan = new User(new BankAccount("24"), "jan", "potsdam", new Date());
 
         User.transaction(new BigDecimal(200), henk.getBankAccount(), tom.getBankAccount());
-        BankAccount account = chooseCustomer(sc);
+
+        Optional<BankAccount> accountOptional = chooseCustomer(sc);
+
 
         System.out.println(" optie 1: storten\n" +
                 "Optie 2: overboeken\n" +
@@ -25,6 +27,11 @@ public class Main {
                 "OPtie 4: terug naar klant kiezen");
 
         int choice = sc.nextInt();
+        if (accountOptional.isEmpty()) {
+            return;
+        }
+        BankAccount account = accountOptional.get();
+
         switch (choice) {
             case 1:
                 System.out.println("gaat uw gang");
@@ -33,15 +40,15 @@ public class Main {
             case 2:
                 System.out.println("welk banknummer?");
                 sc.nextLine();
-                BankAccount acc2 = chooseCustomer(sc);
-                if (acc2 == null) {
+                Optional<BankAccount> acc2 = chooseCustomer(sc);
+                if (acc2.isEmpty()) {
                     System.out.println("user does not exist");
                     break;
                 }
                 System.out.println("hoeveel?");
                 int amount = sc.nextInt();
                 if (amount > 0) {
-                    User.transaction(BigDecimal.valueOf(amount), acc2, account);
+                    User.transaction(BigDecimal.valueOf(amount), acc2.get(), account);
                 } else {
                     System.out.println("bad transaction");
                 }
@@ -51,16 +58,23 @@ public class Main {
             case 4:
                 break;
         }
-        System.out.println(account.getTransactions());
+
 
     }
 
-    public static BankAccount chooseCustomer(Scanner sc) {
-        System.out.println(" Van welk persoon of rekening wilt u de gegevens hebben?");
-        String name = sc.nextLine();
+    public static Optional<BankAccount> chooseCustomer(Scanner sc) {
 
-        Optional<BankAccount> account = User.getUserByName(name);
-        return account.orElse(null);
+
+        Optional<BankAccount> account = Optional.empty();
+
+        do {
+            System.out.println(" Van welk persoon of rekening wilt u de gegevens hebben?");
+            String name = sc.nextLine();
+            account = User.getUserByName(name);
+        }
+        while (account.isEmpty());
+
+        return account;
 
     }
 

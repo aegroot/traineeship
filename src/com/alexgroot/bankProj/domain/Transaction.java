@@ -20,8 +20,8 @@ public class Transaction {
     @Override
     public String toString() {
         return "Transactie{" +
-                "userTo=" + userTo +
-                ", userFrom=" + userFrom +
+                "userTo=" + userTo.getBankNumber() +
+                ", userFrom=" + userFrom.getBankNumber() +
                 ", amount=" + amount +
                 '}';
     }
