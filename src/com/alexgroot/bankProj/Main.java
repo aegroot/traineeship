@@ -1,6 +1,7 @@
 package com.alexgroot.bankProj;
 
 import com.alexgroot.bankProj.domain.BankAccount;
+import com.alexgroot.bankProj.domain.Transaction;
 import com.alexgroot.bankProj.domain.User;
 
 import java.math.BigDecimal;
@@ -35,32 +36,24 @@ public class Main {
 
 
             int choice = sc.nextInt();
-
-
             switch (choice) {
                 case 1:
                     System.out.println("gaat uw gang");
-                    account.stort(sc.nextBigDecimal());
-                    break;
-                case 2:
-                    System.out.println("welke klant?");
-                    sc.next();
-                    Optional<BankAccount> acc2 = chooseCustomer(sc);
-                    if (acc2.isEmpty()) {
-                        System.out.println("user does not exist");
+                    BigDecimal input = sc.nextBigDecimal();
+                    if (input.doubleValue() < 0) {
+                        System.out.println("no negative numbers!");
                         break;
                     }
-                    System.out.println("hoeveel?");
-                    BigDecimal amount = sc.nextBigDecimal();
-                    if (amount.doubleValue() > 0) {
-                        User.transaction(amount, acc2.get(), account);
-                    } else {
-                        System.out.println("bad transaction");
-                    }
+                    account.AddBalance(input);
+                    break;
+                case 2:
+                    Transaction(sc, account);
                     break;
                 case 3:
                     System.out.println(account.getTransactions());
+                    break;
                 case 4:
+                    accountOptional = chooseCustomer(sc);
                     break;
                 case 5:
                     return;
@@ -69,8 +62,8 @@ public class Main {
         }
         while (true);
 
-
     }
+
 
     public static Optional<BankAccount> chooseCustomer(Scanner sc) {
 
@@ -100,6 +93,27 @@ public class Main {
         while (account.isEmpty());
 
         return account;
+
+    }
+
+    public static void Transaction(Scanner sc, BankAccount account) {
+
+        System.out.println("welke klant?");
+        sc.nextLine();
+        String name = sc.nextLine();
+        System.out.println(name);
+        Optional<BankAccount> acc2 = User.getUserByName(name);
+        if (acc2.isEmpty()) {
+            System.out.println("user does not exist");
+            return;
+        }
+        System.out.println("hoeveel?");
+        BigDecimal amount = sc.nextBigDecimal();
+        if (amount.doubleValue() > 0 && amount.doubleValue() <= account.calculateBalance().doubleValue()) {
+            User.transaction(amount, acc2.get(), account);
+        } else {
+            System.out.println("bad transaction");
+        }
 
     }
 

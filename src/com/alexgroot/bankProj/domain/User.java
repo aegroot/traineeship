@@ -55,8 +55,8 @@ public class User {
 
     public static void transaction(BigDecimal amount, BankAccount to, BankAccount from) {
         if (to.canExecuteTransaction(amount) && from.canExecuteTransaction(amount)) {
+            from.executeTransaction(to, amount.multiply(BigDecimal.valueOf(-1)));
             to.executeTransaction(from, amount);
-            from.executeTransaction(to, amount);
         }
     }
 

@@ -12,13 +12,16 @@ public class BankAccount {
         transactions = new ArrayList<>();
     }
 
-    public Boolean canExecuteTransaction(BigDecimal amount) {
+    protected Boolean canExecuteTransaction(BigDecimal amount) {
         return calculateBalance().add(amount).intValue() > -1000;
     }
 
 
     public void executeTransaction(BankAccount account, BigDecimal amount) {
+
+
         transactions.add(new Transaction(this, account, amount));
+
     }
 
 
@@ -32,7 +35,7 @@ public class BankAccount {
         return total;
     }
 
-    public void stort(BigDecimal amount) {
+    public void AddBalance(BigDecimal amount) {
         executeTransaction(this, amount);
     }
 
